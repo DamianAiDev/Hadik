@@ -1,0 +1,13 @@
+{
+  "name": "Hadik Nokia",
+  "short_name": "Hadik",
+  "start_url": "/Hadik/",
+  "display": "standalone",
+  "background_color": "#9bc400",
+  "theme_color": "#2b2b2b",
+  "icons": [{
+    "src": "https://cdn-icons-png.flaticon.com/512/528/528105.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}
