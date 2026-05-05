@@ -1,23 +1,36 @@
-const cacheName = 'hadik-v1';
-const assets = [
-  '/Hadik/',
-  '/Hadik/index.html',
-  '/Hadik/manifest.json'
+const CACHE_NAME = 'hadik-v1';
+const ASSETS = [
+  './',
+  './index.html',
+  './manifest.json'
 ];
 
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(cacheName).then((cache) => cache.addAll(assets))
+// TU JE TEN INSTALL EVENT:
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log('SW: Cachujem súbory');
+      return cache.addAll(ASSETS);
+    })
   );
 });
 
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((res) => res || fetch(e.request))
+// Aktivácia a čistenie starej cache
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+      );
+    })
   );
-});self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open('v1').then((c) => c.addAll(['/Hadik/', '/Hadik/index.html'])));
 });
-self.addEventListener('fetch', (e) => {
-  e.respondWith(caches.match(e.request).then((res) => res || fetch(e.request)));
+
+// Obsluha požiadaviek (aby to išlo offline)
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
 });
