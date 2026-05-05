@@ -7,7 +7,9 @@
     <link rel="manifest" href="/Hadik/manifest.json">
     <script>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/Hadik/sw.js');
+        navigator.serviceWorker.register('./sw.js')
+          .then(() => console.log("SW Registrovaný"))
+          .catch(err => console.log("SW Chyba:", err));
       }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
