@@ -1,7 +1,7 @@
 {
   "name": "Hadik Nokia",
   "short_name": "Hadik",
-  "start_url": "/Hadik/",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#9bc400",
   "theme_color": "#2b2b2b",
